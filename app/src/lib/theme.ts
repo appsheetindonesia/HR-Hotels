@@ -27,6 +27,11 @@ export function useRail({ onToggle }: { onToggle?: () => void } = {}) {
     return () => removeEventListener('resize', onResize)
   }, [rail])
   // manual collapse / expand — persisted so a desktop reload remembers the choice
-  const toggle = () => { const next = !rail; setRail(next); try { localStorage.setItem('rotela:rail', next ? '1' : '0') } catch (e) { } onToggle?.() }
+  const toggle = () => {
+    const next = !rail
+    setRail(next)
+    try { localStorage.setItem('rotela:rail', next ? '1' : '0') } catch (e) { }
+    onToggle?.()
+  }
   return [rail, toggle] as const
 }

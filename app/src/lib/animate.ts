@@ -1,125 +1,219 @@
-import { gsap } from 'gsap'
-
 /**
- * Rotela animation manager.
+ * Rotela animation manager — mirrors the reference GSAP rig (kit.js / today.js).
  *
- * Every page is injected via dangerouslySetInnerHTML, so animations must run
- * after the DOM lands. This module plays a GSAP timeline that mirrors the
- * reference rig: entrance fade, sidebar active pill, curve bars, leave bars,
- * meters, rings, dots.
+ * The reference drives everything through GSAP with these exact helpers:
+ *   so()  header      yPercent 115 → 0, rotation 6 → 0, power4.out, .022 stagger
+ *   co()  content     opacity/y/scale entrance, expo.out .8s, .06 stagger
+ *   lo()  lists       opacity/x/y, power3.out .55s, .04 stagger
+ *   uo()  cards       y 40 + alternating rotation, back.out(1.4) .85s, .07 stagger
+ *   fo()  bars        scaleY/scaleX 0 → end, expo.out .9s, .03 stagger
+ *   po()  pop-in      scale .6 → 1, back.out(3) .6s, .05 stagger
+ *   wo()  pill        clipPath inset() morph, power3.inOut .45s
+ *   curve             per-column stagger, delay .3 + n*.03, expo.out 1s
+ *
+ * Pages are injected via innerHTML, so this runs once content exists.
  */
+import { gsap } from 'gsap'
+import curveData from './data/curve.json'
 
-function scaleYOf(el: HTMLElement): number {
-  const m = window.getComputedStyle(el).transform.match(/scale\(1,\s*([\d.]+)\)/)
-  return m ? parseFloat(m[1]) : 1
+const EASE_POWER4 = 'power4.out'
+const EASE_EXPO = 'expo.out'
+const EASE_POWER3 = 'power3.out'
+const EASE_BACK14 = 'back.out(1.4)'
+const EASE_BACK3 = 'back.out(3)'
+
+function qSel(container: Element, selector: string): HTMLElement[] {
+  return Array.from(container.querySelectorAll(selector)) as HTMLElement[]
 }
 
-function scaleXOf(el: HTMLElement): number {
-  const m = window.getComputedStyle(el).transform.match(/scale\(([\d.]+),\s*1\)/) ||
-    window.getComputedStyle(el).transform.match(/scale\(([\d.]+)\)/)
-  return m ? parseFloat(m[1]) : 1
-}
-
-export function playPageAnimation() {
-  const tl = gsap.timeline()
-  const view = document.querySelector('.view')
-  const container = view?.querySelector('div')
-  if (!container) return tl
-
-  // 1. Page entrance: fade + slide up
-  tl.from(container, { opacity: 0, y: 14, duration: 0.4, ease: 'power2.out' }, 0)
-
-  // 2. Sidebar active pill -> follow the active nav item
-  const side = document.querySelector('.side')?.getBoundingClientRect()
+// ---------------------------------------------------------------- pill (wo)
+function pillAnimate() {
   const pill = document.querySelector('.snav__pill') as HTMLElement
   const active = document.querySelector('.snav__item[aria-current=page]') as HTMLElement
-  if (pill && active && side) {
-    const r = active.getBoundingClientRect()
-    tl.fromTo(
-      pill,
-      { clipPath: 'inset(25px 4px 578px round 12px)', x: 0, y: 0 },
+  const side = document.querySelector('.side') as HTMLElement
+  if (!pill || !active || !side) return
+
+  const inset = (t: number, r: number, b: number, l: number) => `inset(${t}px ${r}px ${b}px ${l}px round 12px)`
+  const from = { t: 25, r: 4, b: 578, l: 4 }
+  const to = { t: 0, r: 0, b: 0, l: 0 }
+  const a = active.getBoundingClientRect()
+  const s = side.getBoundingClientRect()
+
+  gsap.killTweensOf(pill)
+  gsap.set(pill, { clipPath: inset(from.t, from.r, from.b, from.l), opacity: 1 })
+  gsap.fromTo(
+    pill,
+    { clipPath: inset(from.t, from.r, from.b, from.l), x: 0, y: 0 },
+    {
+      clipPath: inset(to.t, to.r, to.b, to.l),
+      x: a.left - s.left,
+      y: a.top - s.top,
+      width: a.width,
+      height: a.height,
+      duration: 0.45,
+      ease: 'power3.inOut',
+    }
+  )
+}
+
+// ------------------------------------------------------------------- curve
+/**
+ * The reference computes each bar as scaleY = count/max and stacks departments
+ * with y = -(cumulative/max) * columnHeight. Those exact end states are captured
+ * from the live demo in curve.json, so we replay the identical motion:
+ * fromTo({scaleY:0,y:0}) with duration 1s, delay .3 + columnIndex*.03, expo.out.
+ */
+function curveAnimate(container: Element) {
+  const cols = qSel(container, '.curve__col')
+  if (!cols.length || cols.length !== curveData.length) return
+
+  cols.forEach((col, n) => {
+    const bars = Array.from(col.querySelectorAll('i')) as HTMLElement[]
+    const ends = curveData[n] as [number, number][]
+    bars.forEach((bar, k) => {
+      const [scaleY, y] = ends[k] ?? [0, 0]
+      if (!scaleY && !y) return
+      gsap.fromTo(
+        bar,
+        { scaleY: 0, y: 0 },
+        { scaleY, y, duration: 1, delay: 0.3 + n * 0.03, ease: EASE_EXPO }
+      )
+    })
+  })
+
+  const now = container.querySelector('.curve__now') as HTMLElement
+  if (now) {
+    gsap.fromTo(
+      now,
+      { scaleY: 0, opacity: 0 },
+      { scaleY: 1, opacity: 1, duration: 0.7, delay: 1.1, ease: EASE_EXPO, transformOrigin: '50% 100%', clearProps: 'transform,opacity' }
+    )
+  }
+}
+
+// ------------------------------------------------------------------- bars
+/** Generic scaleY/width bars (meters, leave calendar, funnel, split). */
+function barsAnimate(container: Element) {
+  const bars = Array.from(
+    new Set([
+      ...qSel(container, '.meter'),
+      ...qSel(container, '[style*="transform: scale"]'),
+      ...qSel(container, '[style*="width: calc"]'),
+      ...qSel(container, '.funnel__bar i'),
+      ...qSel(container, '.split__seg i'),
+    ])
+  ) as HTMLElement[]
+
+  const widthBars: HTMLElement[] = []
+  const scaleBars: HTMLElement[] = []
+  for (const el of bars) {
+    if (/width:\s*calc/.test(el.getAttribute('style') || '')) widthBars.push(el)
+    else scaleBars.push(el)
+  }
+
+  if (scaleBars.length) {
+    const ends = scaleBars.map((el) => {
+      const m = getComputedStyle(el).transform.match(/scale\(1,\s*([\d.]+)\)/) ||
+        getComputedStyle(el).transform.match(/scale\(([\d.]+),\s*([\d.]+)\)/)
+      if (!m) return { y: 1, x: 1 }
+      return m[2] !== undefined ? { y: parseFloat(m[2]), x: parseFloat(m[1]) } : { y: parseFloat(m[1]), x: parseFloat(m[1]) }
+    })
+    gsap.fromTo(
+      scaleBars,
+      { scaleY: 0, scaleX: 0 },
       {
-        clipPath: 'inset(0px 0px 0px 0px round 12px)',
-        x: r.left - side.left,
-        y: r.top - side.top,
-        width: r.width,
-        height: r.height,
-        duration: 0.45,
-        ease: 'power3.inOut',
-      },
-      0.05
+        scaleY: (_i, el) => ends[scaleBars.indexOf(el as HTMLElement)].y,
+        scaleX: (_i, el) => ends[scaleBars.indexOf(el as HTMLElement)].x,
+        duration: 0.9,
+        ease: EASE_EXPO,
+        stagger: 0.03,
+      }
     )
   }
 
-  // 3. Curve bars (attendance today): animate scaleY from stored transform
-  const curveCols = Array.from(container.querySelectorAll('.curve__col i'))
-  if (curveCols.length) {
-    tl.fromTo(
-      curveCols,
-      { scaleY: 0 },
+  if (widthBars.length) {
+    const ends = widthBars.map((el) => el.getBoundingClientRect().width)
+    gsap.fromTo(
+      widthBars,
+      { width: '0px' },
       {
-        scaleY: (_i, el) => scaleYOf(el as HTMLElement),
-        stagger: 0.025,
-        duration: 0.45,
-        ease: 'power3.out',
-      },
-      0.15
+        width: (_i, el) => `${ends[widthBars.indexOf(el as HTMLElement)]}px`,
+        duration: 0.9,
+        ease: EASE_EXPO,
+        stagger: 0.03,
+      }
+    )
+  }
+}
+
+// ------------------------------------------------------------------- entry
+export function playPageAnimation() {
+  const container = document.querySelector('.view > div')
+  if (!container) return
+
+  // so() — header
+  const heads = qSel(container, '.phead h1, .chead h2')
+  if (heads.length) {
+    gsap.fromTo(
+      heads,
+      { yPercent: 115, rotation: 6 },
+      { yPercent: 0, rotation: 0, duration: 0.85, ease: EASE_POWER4, stagger: 0.022, clearProps: 'transform' }
     )
   }
 
-  // 4. Leave bars [style*="width: calc"]: capture computed width, animate from 0
-  const leaveBars = Array.from(container.querySelectorAll('[style*="width: calc"]'))
-  if (leaveBars.length) {
-    tl.fromTo(
-      leaveBars,
-      { width: 0 },
-      {
-        width: (_i, el) => window.getComputedStyle(el as HTMLElement).width,
-        stagger: 0.02,
-        duration: 0.5,
-        ease: 'power2.out',
-      },
-      0.2
+  // co() — content blocks
+  const contents = qSel(
+    container,
+    '.card, .feed, .curve, .kpis, .td-wait, .td-dept, .funnel, .td-roles, .td-pin, .td-up, .td-starters, .an-main, .pp-dir, .ob-cards, .pr-flow, .tm-grid, .hp-faq, .st-grid'
+  )
+  if (contents.length) {
+    gsap.fromTo(
+      contents,
+      { opacity: 0, y: 26, scale: 0.985 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: EASE_EXPO, stagger: 0.06, clearProps: 'transform,opacity' }
     )
   }
 
-  // 5. Meters [style*="transform: scale"]: capture scaleX, animate from 0
-  const meters = Array.from(container.querySelectorAll('[style*="transform: scale"]'))
-  if (meters.length) {
-    tl.fromTo(
-      meters,
-      { scaleX: 0 },
-      {
-        scaleX: (_i, el) => scaleXOf(el as HTMLElement),
-        stagger: 0.025,
-        duration: 0.5,
-        ease: 'power2.out',
-      },
-      0.25
+  // lo() — lists
+  const lists = qSel(container, 'ul.feed, .td-roles, .td-dept__list, .funnel__row, .charttip + ul')
+  if (lists.length) {
+    gsap.fromTo(
+      lists,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.55, ease: EASE_POWER3, stagger: 0.04, clearProps: 'transform,opacity' }
     )
   }
 
-  // 6. Rings: stroke-dashoffset reveal
-  const arcs = Array.from(container.querySelectorAll('.ring__arc'))
-  if (arcs.length) {
-    tl.fromTo(
-      arcs,
-      { strokeDashoffset: 100 },
-      { strokeDashoffset: 0, stagger: 0.08, duration: 0.55, ease: 'power2.out' },
-      0.3
+  // uo() — cards / tiles
+  const cards = qSel(container, '.td-kpi, .td-start, .kpi, .ob-card, .an-best + .kpi, .team, .hp-faq__item')
+  if (cards.length) {
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 40, rotation: (i: number) => (i % 2 ? 2.5 : -2.5), scale: 0.95 },
+      { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.85, ease: EASE_BACK14, stagger: 0.07, clearProps: 'transform,opacity' }
     )
   }
 
-  // 7. Staff avatar dots pulse-in
-  const dots = Array.from(container.querySelectorAll('.av__dot'))
-  if (dots.length) {
-    tl.fromTo(
-      dots,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, stagger: 0.04, duration: 0.3, ease: 'back.out(1.2)' },
-      0.35
+  // po() — pop-in
+  const pops = qSel(container, '.spark, .ring__arc, .av__dot')
+  if (pops.length) {
+    gsap.fromTo(
+      pops,
+      { scale: 0.6, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: EASE_BACK3, stagger: 0.05, clearProps: 'transform,opacity' }
     )
   }
 
-  return tl
+  // fo() — bars, then the curve stack
+  barsAnimate(container)
+  curveAnimate(container)
+
+  // wo() — sidebar pill
+  pillAnimate()
+}
+
+/** Toast / flash: back.out(2.4) pop used by actions in the reference. */
+export function flashAnimate(el: Element | null) {
+  if (!el) return
+  gsap.fromTo(el, { y: -4, scale: 1.08 }, { y: 0, scale: 1, duration: 0.55, ease: 'back.out(2.4)', overwrite: 'auto', clearProps: 'transform' })
 }

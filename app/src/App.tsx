@@ -44,7 +44,20 @@ export default function App() {
   }, [])
 
   useEffect(() => { scrollTo({ top: 0 }) }, [page])
-  useEffect(() => { playPageAnimation() }, [page])
+
+  // Pages are lazy-loaded and injected via innerHTML, so play the entrance
+  // timeline only once the view container actually holds content.
+  useEffect(() => {
+    let raf = 0
+    let tries = 0
+    const run = () => {
+      const view = document.querySelector('.view > div')
+      if (view && view.children.length) { playPageAnimation(); return }
+      if (tries++ < 40) raf = requestAnimationFrame(run)
+    }
+    raf = requestAnimationFrame(run)
+    return () => cancelAnimationFrame(raf)
+  }, [page])
 
   return (
     <div className="app">
