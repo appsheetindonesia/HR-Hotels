@@ -1,3 +1,4 @@
+import { HtmlView } from '../components/HtmlView'
 import { useRoute } from '../lib/route'
 import company from './ref/settings/company.html'
 import access from './ref/settings/access.html'
@@ -7,5 +8,5 @@ import data from './ref/settings/data.html'
 const M: Record<string, string> = { company, access, appearance, alerts, data }
 export function Settings() {
   const { sub } = useRoute()
-  return (<div dangerouslySetInnerHTML={{ __html: M[sub] ?? company }} />)
+  return (<HtmlView html={M[sub] ?? company} cacheKey={`Settings:${sub}`} />)
 }

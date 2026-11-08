@@ -1,5 +1,6 @@
+import { HtmlView } from '../components/HtmlView'
 import html from './ref/analytics/analytics.html'
 
 export function Analytics() {
-  return (<div dangerouslySetInnerHTML={{ __html: html }} />)
+  return (<HtmlView html={html} cacheKey="Analytics" />)
 }

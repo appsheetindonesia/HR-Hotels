@@ -4,16 +4,20 @@ import { gsap } from 'gsap'
 import { useEffect } from 'react'
 
 export function Drawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const { page } = useRoute()
+
+  // Must run only while the panel is in the DOM — the guard is above so the
+  // tween always has a target, and fromTo avoids a flash on the first frame.
   useEffect(() => {
+    if (!isOpen) return
     const tl = gsap.timeline()
-    tl.from('.scrim', { opacity: 0, duration: 0.25 })
-    tl.from('.drawer', { x: '100%', duration: 0.45, ease: 'power3.out' }, 0.05)
+    tl.fromTo('.scrim', { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' })
+    tl.fromTo('.drawer', { x: '100%' }, { x: 0, duration: 0.45, ease: 'power3.out' }, 0.05)
     return () => {
       tl.kill()
     }
   }, [isOpen])
   if (!isOpen) return null
-  const { page } = useRoute()
 
   const MENU = [
     { id: 'today', label: 'Today', icon: 'grid' },

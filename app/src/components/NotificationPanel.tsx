@@ -1,4 +1,6 @@
 import { Ico } from '../lib/icons'
+import { gsap } from 'gsap'
+import { useEffect } from 'react'
 
 type Notification = {
   id: string
@@ -41,6 +43,14 @@ const NOTIFICATIONS: Notification[] = [
 ]
 
 export function NotificationPanel({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!isOpen) return
+    const tl = gsap.timeline()
+    tl.fromTo('.scrim', { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' })
+    tl.fromTo('.drawer', { x: '100%' }, { x: 0, duration: 0.45, ease: 'power3.out' }, 0.05)
+    return () => { tl.kill() }
+  }, [isOpen])
+
   if (!isOpen) return null
   const unread = NOTIFICATIONS.filter(n => !n.read).length
 

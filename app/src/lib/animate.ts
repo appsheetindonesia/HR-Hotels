@@ -16,6 +16,11 @@
 import { gsap } from 'gsap'
 import curveData from './data/curve.json'
 
+// GPU-composite every transform tween and stop GSAP's auto fallback, which is the
+// difference between a smooth 60fps card entrance and a janky one on integrated GPUs.
+gsap.config({ force3D: true, nullTargetWarn: false })
+gsap.defaults({ overwrite: 'auto' })
+
 const EASE_POWER4 = 'power4.out'
 const EASE_EXPO = 'expo.out'
 const EASE_POWER3 = 'power3.out'
@@ -63,37 +68,52 @@ function pillAnimate() {
  * from the live demo in curve.json, so we replay the identical motion:
  * fromTo({scaleY:0,y:0}) with duration 1s, delay .3 + columnIndex*.03, expo.out.
  */
-function curveAnimate(container: Element) {
+function curveAnimateInto(tl: gsap.core.Timeline, container: Element) {
   const cols = qSel(container, '.curve__col')
   if (!cols.length || cols.length !== curveData.length) return
 
   cols.forEach((col, n) => {
     const bars = Array.from(col.querySelectorAll('i')) as HTMLElement[]
     const ends = curveData[n] as [number, number][]
-    bars.forEach((bar, k) => {
-      const [scaleY, y] = ends[k] ?? [0, 0]
-      if (!scaleY && !y) return
-      gsap.fromTo(
-        bar,
+    // one stagger per column keeps the bar count low while preserving the
+    // reference's per-column delay of .3 + n*.03
+    const animatable = bars
+      .map((bar, k) => ({ bar, end: ends[k] }))
+      .filter((b) => b.end && (b.end[0] || b.end[1]))
+
+    if (animatable.length) {
+      tl.fromTo(
+        animatable.map(a => a.bar),
         { scaleY: 0, y: 0 },
-        { scaleY, y, duration: 1, delay: 0.3 + n * 0.03, ease: EASE_EXPO }
+        {
+          scaleY: (_i, el) => ends[animatable.findIndex(a => a.bar === el)]?.[0] ?? 0,
+          y: (_i, el) => ends[animatable.findIndex(a => a.bar === el)]?.[1] ?? 0,
+          duration: 1,
+          delay: 0.3 + n * 0.03,
+          ease: EASE_EXPO,
+        },
+        0
       )
-    })
+    }
   })
 
   const now = container.querySelector('.curve__now') as HTMLElement
   if (now) {
-    gsap.fromTo(
+    tl.fromTo(
       now,
       { scaleY: 0, opacity: 0 },
-      { scaleY: 1, opacity: 1, duration: 0.7, delay: 1.1, ease: EASE_EXPO, transformOrigin: '50% 100%', clearProps: 'transform,opacity' }
+      { scaleY: 1, opacity: 1, duration: 0.7, delay: 1.1, ease: EASE_EXPO, transformOrigin: '50% 100%', clearProps: 'transform,opacity' },
+      0
     )
   }
 }
 
 // ------------------------------------------------------------------- bars
-/** Generic scaleY/width bars (meters, leave calendar, funnel, split). */
-function barsAnimate(container: Element) {
+/** Generic scaleY/scaleX bars (meters, leave calendar, funnel, split). */
+function barsAnimateInto(tl: gsap.core.Timeline, at: number) {
+  const container = document.querySelector('.view > div')
+  if (!container) return
+
   const bars = Array.from(
     new Set([
       ...qSel(container, '.meter'),
@@ -118,98 +138,127 @@ function barsAnimate(container: Element) {
       if (!m) return { y: 1, x: 1 }
       return m[2] !== undefined ? { y: parseFloat(m[2]), x: parseFloat(m[1]) } : { y: parseFloat(m[1]), x: parseFloat(m[1]) }
     })
-    gsap.fromTo(
+    tl.fromTo(
       scaleBars,
       { scaleY: 0, scaleX: 0 },
       {
         scaleY: (_i, el) => ends[scaleBars.indexOf(el as HTMLElement)].y,
         scaleX: (_i, el) => ends[scaleBars.indexOf(el as HTMLElement)].x,
-        duration: 0.9,
+        duration: 0.6,
         ease: EASE_EXPO,
-        stagger: 0.03,
-      }
+        stagger: 0.02,
+      },
+      at
     )
   }
 
   if (widthBars.length) {
-    const ends = widthBars.map((el) => el.getBoundingClientRect().width)
-    gsap.fromTo(
+    // Animate scaleX instead of width: width triggers layout every frame (the
+    // main source of jank on the leave calendar), while scaleX is GPU-composited.
+    // The reference sizes these with calc(), so lock the resolved width first,
+    // then grow them from transform-origin left.
+    gsap.set(widthBars, {
+      width: (_i, el) => `${(el as HTMLElement).getBoundingClientRect().width}px`,
+      transformOrigin: '0% 50%',
+    })
+    tl.fromTo(
       widthBars,
-      { width: '0px' },
-      {
-        width: (_i, el) => `${ends[widthBars.indexOf(el as HTMLElement)]}px`,
-        duration: 0.9,
-        ease: EASE_EXPO,
-        stagger: 0.03,
-      }
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.6, ease: EASE_EXPO, stagger: 0.03 },
+      at
     )
   }
 }
 
 // ------------------------------------------------------------------- entry
+/**
+ * Everything goes on ONE timeline with staggered start times. Firing ~170
+ * tweens simultaneously (heads + contents + cards + bars + curve) is what makes
+ * the entrance stutter — spreading them across ~1s keeps every frame cheap.
+ */
 export function playPageAnimation() {
   const container = document.querySelector('.view > div')
   if (!container) return
+  const tl = gsap.timeline()
 
-  // so() — header
+  const add = (fn: () => void) => fn()
+
+  // so() — header, first
   const heads = qSel(container, '.phead h1, .chead h2')
   if (heads.length) {
-    gsap.fromTo(
-      heads,
-      { yPercent: 115, rotation: 6 },
-      { yPercent: 0, rotation: 0, duration: 0.85, ease: EASE_POWER4, stagger: 0.022, clearProps: 'transform' }
+    add(() =>
+      tl.fromTo(
+        heads,
+        { yPercent: 115, rotation: 6 },
+        { yPercent: 0, rotation: 0, duration: 0.62, ease: EASE_POWER4, stagger: 0.018, clearProps: "transform" },
+        0
+      )
     )
   }
 
-  // co() — content blocks
+  // co() — content blocks, overlapping the header tail
   const contents = qSel(
     container,
     '.card, .feed, .curve, .kpis, .td-wait, .td-dept, .funnel, .td-roles, .td-pin, .td-up, .td-starters, .an-main, .pp-dir, .ob-cards, .pr-flow, .tm-grid, .hp-faq, .st-grid'
   )
   if (contents.length) {
-    gsap.fromTo(
-      contents,
-      { opacity: 0, y: 26, scale: 0.985 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: EASE_EXPO, stagger: 0.06, clearProps: 'transform,opacity' }
+    add(() =>
+      tl.fromTo(
+        contents,
+        { opacity: 0, y: 26, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.58, ease: EASE_EXPO, stagger: 0.045, clearProps: "transform,opacity" },
+        0.08
+      )
+    )
+  }
+
+  // uo() — cards / tiles, offset so they don't collide with contents
+  const cards = qSel(container, '.td-kpi, .td-start, .kpi, .ob-card, .team, .hp-faq__item')
+  if (cards.length) {
+    add(() =>
+      tl.fromTo(
+        cards,
+        { opacity: 0, y: 40, rotation: (i: number) => (i % 2 ? 2.5 : -2.5), scale: 0.95 },
+        { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.62, ease: EASE_BACK14, stagger: 0.05, clearProps: "transform,opacity" },
+        0.16
+      )
     )
   }
 
   // lo() — lists
-  const lists = qSel(container, 'ul.feed, .td-roles, .td-dept__list, .funnel__row, .charttip + ul')
+  const lists = qSel(container, 'ul.feed, .td-roles, .td-dept__list, .funnel__row')
   if (lists.length) {
-    gsap.fromTo(
-      lists,
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.55, ease: EASE_POWER3, stagger: 0.04, clearProps: 'transform,opacity' }
-    )
-  }
-
-  // uo() — cards / tiles
-  const cards = qSel(container, '.td-kpi, .td-start, .kpi, .ob-card, .an-best + .kpi, .team, .hp-faq__item')
-  if (cards.length) {
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 40, rotation: (i: number) => (i % 2 ? 2.5 : -2.5), scale: 0.95 },
-      { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.85, ease: EASE_BACK14, stagger: 0.07, clearProps: 'transform,opacity' }
+    add(() =>
+      tl.fromTo(
+        lists,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.42, ease: EASE_POWER3, stagger: 0.02, clearProps: "transform,opacity" },
+        0.2
+      )
     )
   }
 
   // po() — pop-in
   const pops = qSel(container, '.spark, .ring__arc, .av__dot')
   if (pops.length) {
-    gsap.fromTo(
-      pops,
-      { scale: 0.6, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.6, ease: EASE_BACK3, stagger: 0.05, clearProps: 'transform,opacity' }
+    add(() =>
+      tl.fromTo(
+        pops,
+        { scale: 0.6, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.46, ease: EASE_BACK3, stagger: 0.04, clearProps: "transform,opacity" },
+        0.24
+      )
     )
   }
 
-  // fo() — bars, then the curve stack
-  barsAnimate(container)
-  curveAnimate(container)
+  // fo() — generic bars
+  barsAnimateInto(tl, 0.28)
 
-  // wo() — sidebar pill
-  pillAnimate()
+  // curve stack — matches the reference's per-column delay
+  curveAnimateInto(tl, container)
+
+  // wo() — sidebar pill, no dependency on page content
+  tl.call(() => pillAnimate(), undefined, 0.05)
 }
 
 /** Toast / flash: back.out(2.4) pop used by actions in the reference. */
