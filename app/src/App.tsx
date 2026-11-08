@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import './styles/all.css'
 import { Sidebar } from './components/Sidebar'
 import { Topbar, Tabbar } from './components/Topbar'
+import { Drawer } from './components/Drawer'
 import { Finder } from './components/Finder'
 import { useRoute, type Page } from './lib/route'
 
@@ -27,7 +28,7 @@ const PAGES: Record<Page, React.ComponentType> = {
 export default function App() {
   const { page } = useRoute()
   const [finder, setFinder] = useState(false)
-  const [, setDrawer] = useState(false)
+  const [drawer, setDrawer] = useState(false)
   const Page = PAGES[page]
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function App() {
       </main>
       <Tabbar onMenu={() => setDrawer(v => !v)} />
       {finder && <Finder onClose={() => setFinder(false)} />}
+      {drawer && <Drawer isOpen={drawer} onClose={() => setDrawer(false)} />}
     </div>
   )
 }

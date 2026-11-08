@@ -5,5 +5,5 @@ import kudos from './ref/performance/kudos.html'
 const M: Record<string, string> = { reviews, goals, kudos }
 export function Performance() {
   const { sub } = useRoute()
-  return (<div className="page" dangerouslySetInnerHTML={{ __html: M[sub] ?? reviews }} />)
+  return (<div dangerouslySetInnerHTML={{ __html: M[sub] ?? reviews }} />)
 }

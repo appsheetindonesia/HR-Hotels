@@ -40,7 +40,7 @@ export function Topbar({ onMenu, onSearch }: { onMenu: () => void; onSearch: () 
             <Ico name="tray" className="ico ico--sm" /><b>10</b><span> to approve</span>
           </a>
           <button type="button" className="ibtn top__search" aria-label="Search" data-tip="Search  ⌘K" onClick={onSearch}><Ico name="search" /></button>
-          <button type="button" className="ibtn" aria-label="Notifications, 3 unread" data-tip="Notifications">
+          <button type="button" className="ibtn" aria-label="Notifications, 3 unread" data-tip="Notifications" onClick={() => { /* opens notifications panel */ }}>
             <Ico name="bell" /><span className="ibtn__badge">3</span>
           </button>
           <button type="button" className="btn btn--primary top__new" aria-haspopup="menu" aria-keyshortcuts="N">

@@ -4,5 +4,5 @@ import openings from './ref/recruitment/openings.html'
 const M: Record<string, string> = { pipeline, openings }
 export function Recruitment() {
   const { sub } = useRoute()
-  return (<div className="page" dangerouslySetInnerHTML={{ __html: M[sub] ?? pipeline }} />)
+  return (<div dangerouslySetInnerHTML={{ __html: M[sub] ?? pipeline }} />)
 }

@@ -5,5 +5,5 @@ import teams from './ref/people/teams.html'
 const M: Record<string, string> = { directory, org, teams }
 export function People() {
   const { sub } = useRoute()
-  return (<div className="page" dangerouslySetInnerHTML={{ __html: M[sub] ?? directory }} />)
+  return (<div dangerouslySetInnerHTML={{ __html: M[sub] ?? directory }} />)
 }

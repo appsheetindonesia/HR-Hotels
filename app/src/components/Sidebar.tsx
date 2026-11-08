@@ -31,7 +31,7 @@ const NAV: { group: string; items: { id: Page; label: string; icon: string; coun
 export function Sidebar({ onSearch }: { onSearch: () => void }) {
   const { page } = useRoute()
   const [theme, setTheme] = useTheme()
-  const [rail, setRail] = useRail()
+  const [rail, toggleRail] = useRail()
 
   return (
     <aside className="side" aria-label="Sidebar">
@@ -40,7 +40,7 @@ export function Sidebar({ onSearch }: { onSearch: () => void }) {
           <span className="mark"><Ico name="logo" /></span>
           <span className="brand__text"><b>Rotela</b><small>Saltwick Hotels</small></span>
         </a>
-        <button type="button" className="collapse" aria-label="Collapse sidebar" aria-pressed={rail} aria-keyshortcuts="[" data-tip={rail ? 'Expand  [' : 'Collapse  ['} onClick={() => setRail(!rail)}>
+        <button type="button" className="collapse" aria-label="Collapse sidebar" aria-pressed={rail} aria-keyshortcuts="[" data-tip={rail ? 'Expand  [' : 'Collapse  ['} onClick={() => toggleRail()}>
           <Ico name="collapse" />
         </button>
       </div>

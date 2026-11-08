@@ -5,5 +5,5 @@ import balances from './ref/leave/balances.html'
 const M: Record<string, string> = { requests, calendar, balances }
 export function Leave() {
   const { sub } = useRoute()
-  return (<div className="page" dangerouslySetInnerHTML={{ __html: M[sub] ?? requests }} />)
+  return (<div dangerouslySetInnerHTML={{ __html: M[sub] ?? requests }} />)
 }

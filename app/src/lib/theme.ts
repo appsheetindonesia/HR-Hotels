@@ -16,13 +16,17 @@ export function useTheme() {
   return [theme, setTheme] as const
 }
 
-const readRail = () => document.documentElement.classList.contains('is-rail')
+const readRail = () => innerWidth > 760 && innerWidth < 1280
 
-export function useRail() {
+export function useRail({ onToggle }: { onToggle?: () => void } = {}) {
   const [rail, setRail] = useState(readRail)
   useEffect(() => {
     document.documentElement.classList.toggle('is-rail', rail)
-    try { localStorage.setItem('rotela:rail', rail ? '1' : '0') } catch (e) { }
+    const onResize = () => { setRail(readRail()) }
+    addEventListener('resize', onResize)
+    return () => removeEventListener('resize', onResize)
   }, [rail])
-  return [rail, setRail] as const
+  // manual collapse / expand — persisted so a desktop reload remembers the choice
+  const toggle = () => { const next = !rail; setRail(next); try { localStorage.setItem('rotela:rail', next ? '1' : '0') } catch (e) { } onToggle?.() }
+  return [rail, toggle] as const
 }
