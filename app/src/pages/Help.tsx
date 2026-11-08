@@ -1,6 +1,6 @@
-import { HtmlView } from '../components/HtmlView'
+import { InteractiveHtmlView } from '../components/InteractiveHtmlView'
 import html from './ref/help/help.html'
 
 export function Help() {
-  return (<HtmlView html={html} cacheKey="Help" />)
+  return (<InteractiveHtmlView html={html} cacheKey="Help" />)
 }

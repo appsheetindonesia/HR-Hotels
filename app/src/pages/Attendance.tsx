@@ -1,4 +1,4 @@
-import { HtmlView } from '../components/HtmlView'
+import { InteractiveHtmlView } from '../components/InteractiveHtmlView'
 import { AttendanceFloor } from './AttendanceFloor'
 import { AttendanceRota } from './AttendanceRota'
 import { AttendanceTimesheets } from './AttendanceTimesheets'
@@ -10,5 +10,5 @@ export function Attendance() {
   if (sub === 'today') return <AttendanceFloor />
   if (sub === 'rota') return <AttendanceRota />
   if (sub === 'timesheets') return <AttendanceTimesheets />
-  return <HtmlView html={timesheetsFallback} cacheKey="Attendance:timesheets" />
+  return <InteractiveHtmlView html={timesheetsFallback} cacheKey="Attendance:timesheets" />
 }

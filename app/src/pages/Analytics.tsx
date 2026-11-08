@@ -1,6 +1,6 @@
-import { HtmlView } from '../components/HtmlView'
+import { InteractiveHtmlView } from '../components/InteractiveHtmlView'
 import html from './ref/analytics/analytics.html'
 
 export function Analytics() {
-  return (<HtmlView html={html} cacheKey="Analytics" />)
+  return <InteractiveHtmlView html={html} cacheKey="Analytics" />
 }

@@ -1,4 +1,4 @@
-import { HtmlView } from '../components/HtmlView'
+import { InteractiveHtmlView } from '../components/InteractiveHtmlView'
 import { LeaveRequests } from './LeaveRequests'
 import { useRoute } from '../lib/route'
 import calendar from './ref/leave/calendar.html'
@@ -7,5 +7,5 @@ const M: Record<string, string> = { calendar, balances }
 export function Leave() {
   const { sub } = useRoute()
   if (sub === 'requests') return <LeaveRequests />
-  return <HtmlView html={M[sub] ?? calendar} cacheKey={`Leave:${sub}`} />
+  return <InteractiveHtmlView html={M[sub] ?? calendar} cacheKey={`Leave:${sub}`} />
 }
