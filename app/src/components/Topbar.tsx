@@ -13,7 +13,7 @@ const CRUMB: Record<Page, string> = {
   settings: 'Settings', help: 'Help & support',
 }
 
-export function Topbar({ onMenu, onSearch }: { onMenu: () => void; onSearch: () => void }) {
+export function Topbar({ onMenu, onSearch, onNotif }: { onMenu: () => void; onSearch: () => void; onNotif: () => void }) {
   const { page, sub } = useRoute()
   const tabs = TABS[page]
   const subLabel = tabs.find(t => t.id === sub)?.label
@@ -40,7 +40,7 @@ export function Topbar({ onMenu, onSearch }: { onMenu: () => void; onSearch: () 
             <Ico name="tray" className="ico ico--sm" /><b>10</b><span> to approve</span>
           </a>
           <button type="button" className="ibtn top__search" aria-label="Search" data-tip="Search  ⌘K" onClick={onSearch}><Ico name="search" /></button>
-          <button type="button" className="ibtn" aria-label="Notifications, 3 unread" data-tip="Notifications" onClick={() => { /* opens notifications panel */ }}>
+          <button type="button" className="ibtn" aria-label="Notifications, 3 unread" data-tip="Notifications" onClick={onNotif}>
             <Ico name="bell" /><span className="ibtn__badge">3</span>
           </button>
           <button type="button" className="btn btn--primary top__new" aria-haspopup="menu" aria-keyshortcuts="N">

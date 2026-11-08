@@ -3,6 +3,7 @@ import './styles/all.css'
 import { Sidebar } from './components/Sidebar'
 import { Topbar, Tabbar } from './components/Topbar'
 import { Drawer } from './components/Drawer'
+import { NotificationPanel } from './components/NotificationPanel'
 import { Finder } from './components/Finder'
 import { useRoute, type Page } from './lib/route'
 
@@ -29,12 +30,13 @@ export default function App() {
   const { page } = useRoute()
   const [finder, setFinder] = useState(false)
   const [drawer, setDrawer] = useState(false)
+  const [notif, setNotif] = useState(false)
   const Page = PAGES[page]
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setFinder(v => !v) }
-      if (e.key === 'Escape') { setFinder(false); setDrawer(false) }
+      if (e.key === 'Escape') { setFinder(false); setDrawer(false); setNotif(false) }
     }
     addEventListener('keydown', onKey)
     return () => removeEventListener('keydown', onKey)
@@ -46,7 +48,7 @@ export default function App() {
     <div className="app">
       <Sidebar onSearch={() => setFinder(true)} />
       <main className="main" id="main">
-        <Topbar onMenu={() => setDrawer(v => !v)} onSearch={() => setFinder(true)} />
+        <Topbar onMenu={() => setDrawer(v => !v)} onSearch={() => setFinder(true)} onNotif={() => setNotif(v => !v)} />
         <div className="view">
           <Suspense fallback={null}>
             <Page />
@@ -56,6 +58,7 @@ export default function App() {
       <Tabbar onMenu={() => setDrawer(v => !v)} />
       {finder && <Finder onClose={() => setFinder(false)} />}
       {drawer && <Drawer isOpen={drawer} onClose={() => setDrawer(false)} />}
+      {notif && <NotificationPanel isOpen={notif} onClose={() => setNotif(false)} />}
     </div>
   )
 }
