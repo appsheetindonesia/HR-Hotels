@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef0f3" />
+  <title>Rotela — the people desk of Saltwick Hotels</title>
+  <meta name="description" content="Rotela is the people desk of Saltwick Hotels, three small hotels on the Yorkshire coast: who is on the floor right now, the week's rota you drag shifts across, timesheets, leave requests and a leave calendar, the monthly pay run and payslips, autumn reviews, goals and kudos, a hiring pipeline you drag candidates through, onboarding checklists and people analytics — light and dark, fully animated." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..700&display=swap" rel="stylesheet" />
+  <script>
+    (function (d) {
+      d.classList.add('js');
+      var w = innerWidth;
+      try {
+        var t = JSON.parse(localStorage.getItem('rotela:theme') || '"light"');
+        d.dataset.theme = t === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
+        if (localStorage.getItem('rotela:rail') === '1' && w >= 1280) d.classList.add('is-rail');
+      } catch (e) { }
+      if (w > 760 && w < 1280) d.classList.add('is-rail');
+      if (d.dataset.theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f1113');
+    })(document.documentElement);
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="root"></div>
+  <noscript><p style="padding:24px">Rotela needs JavaScript to run.</p></noscript>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

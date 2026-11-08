@@ -1,0 +1,884 @@
+[
+ {
+  "initials": "BW",
+  "name": "Bilal Walsh",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4.3 yrs"
+ },
+ {
+  "initials": "CH",
+  "name": "Callum Hart",
+  "role": "General manager",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "10 yrs"
+ },
+ {
+  "initials": "CK",
+  "name": "Chiara Kaur",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Moorgate",
+  "type": "Part-time · 30h",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "CM",
+  "name": "Chiara Moreno",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "4.1 yrs"
+ },
+ {
+  "initials": "CM",
+  "name": "Ciaran Moreno",
+  "role": "Events coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Part-time · 20h",
+  "tenure": "5 mo"
+ },
+ {
+  "initials": "CN",
+  "name": "Clara Nakamura",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.7 yrs"
+ },
+ {
+  "initials": "DM",
+  "name": "Daisy Mensah",
+  "role": "Housekeeping supervisor",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Part-time · 30h",
+  "tenure": "6.9 yrs"
+ },
+ {
+  "initials": "DO",
+  "name": "Daniel Okafor",
+  "role": "Head chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "7.7 yrs"
+ },
+ {
+  "initials": "DA",
+  "name": "Dmitri Ahmed",
+  "role": "Night auditor",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.7 yrs"
+ },
+ {
+  "initials": "DB",
+  "name": "Dmitri Byrne",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4.7 yrs"
+ },
+ {
+  "initials": "EC",
+  "name": "Elif Conti",
+  "role": "Fitness instructor",
+  "dept": "Spa & leisure",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "1.3 yrs"
+ },
+ {
+  "initials": "EM",
+  "name": "Elif Murray",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.5 yrs"
+ },
+ {
+  "initials": "EM",
+  "name": "Ellie Mensah",
+  "role": "Sous chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4.5 yrs"
+ },
+ {
+  "initials": "ER",
+  "name": "Ellie Rahman",
+  "role": "People coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "5.6 yrs"
+ },
+ {
+  "initials": "EA",
+  "name": "Esme Adeyemi",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Moorgate",
+  "type": "Part-time · 30h",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "EL",
+  "name": "Esme Larsen",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "6.8 yrs"
+ },
+ {
+  "initials": "ER",
+  "name": "Esme Rahman",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "4.9 yrs"
+ },
+ {
+  "initials": "EG",
+  "name": "Ewan Gallagher",
+  "role": "Site lead, Moorgate",
+  "dept": "Front desk",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "8.5 yrs"
+ },
+ {
+  "initials": "FD",
+  "name": "Fatima Doyle",
+  "role": "Lifeguard",
+  "dept": "Spa & leisure",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "1 mo"
+ },
+ {
+  "initials": "FM",
+  "name": "Fatima Mensah",
+  "role": "Lifeguard",
+  "dept": "Spa & leisure",
+  "site": "Harbour",
+  "type": "Part-time · 30h",
+  "tenure": "2.6 yrs"
+ },
+ {
+  "initials": "FN",
+  "name": "Fatima Novak",
+  "role": "Bartender",
+  "dept": "Restaurant & bar",
+  "site": "Moorgate",
+  "type": "Part-time · 30h",
+  "tenure": "1.7 yrs"
+ },
+ {
+  "initials": "FC",
+  "name": "Femi Chen",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "3.1 yrs"
+ },
+ {
+  "initials": "FM",
+  "name": "Femi Moreno",
+  "role": "Spa receptionist",
+  "dept": "Spa & leisure",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "2 mo"
+ },
+ {
+  "initials": "FD",
+  "name": "Freya Doyle",
+  "role": "Kitchen porter",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.1 yrs"
+ },
+ {
+  "initials": "FK",
+  "name": "Freya Kaur",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "1.7 yrs"
+ },
+ {
+  "initials": "FM",
+  "name": "Freya Malik",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Moorgate",
+  "type": "Part-time · 24h",
+  "tenure": "1.5 yrs"
+ },
+ {
+  "initials": "FN",
+  "name": "Freya Nakamura",
+  "role": "People coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "3.9 yrs"
+ },
+ {
+  "initials": "GM",
+  "name": "Grace Mbeki",
+  "role": "Executive housekeeper",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "9.2 yrs"
+ },
+ {
+  "initials": "HK",
+  "name": "Hana Kobayashi",
+  "role": "Spa manager",
+  "dept": "Spa & leisure",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "3.9 yrs"
+ },
+ {
+  "initials": "HK",
+  "name": "Harriet Kaur",
+  "role": "Night auditor",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4.4 yrs"
+ },
+ {
+  "initials": "HK",
+  "name": "Hollie Kaur",
+  "role": "Night auditor",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "1.3 yrs"
+ },
+ {
+  "initials": "HY",
+  "name": "Hollie Yusuf",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "4.1 yrs"
+ },
+ {
+  "initials": "IS",
+  "name": "Ingrid Solberg",
+  "role": "Finance manager",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "6.0 yrs"
+ },
+ {
+  "initials": "IL",
+  "name": "Isla Larsen",
+  "role": "People coordinator",
+  "dept": "Operations",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "IN",
+  "name": "Isla Nakamura",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "7 mo"
+ },
+ {
+  "initials": "IW",
+  "name": "Isla Walsh",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.7 yrs"
+ },
+ {
+  "initials": "ID",
+  "name": "Ivy Doyle",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Quay",
+  "type": "Part-time · 30h",
+  "tenure": "2.4 yrs"
+ },
+ {
+  "initials": "IN",
+  "name": "Ivy Novak",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.9 yrs"
+ },
+ {
+  "initials": "JB",
+  "name": "Jamal Barker",
+  "role": "Restaurant supervisor",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "3.7 yrs"
+ },
+ {
+  "initials": "JH",
+  "name": "Jamal Hughes",
+  "role": "Sommelier",
+  "dept": "Restaurant & bar",
+  "site": "Moorgate",
+  "type": "Seasonal",
+  "tenure": "6.4 yrs"
+ },
+ {
+  "initials": "JK",
+  "name": "Jamal Kowalski",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "4.2 yrs"
+ },
+ {
+  "initials": "JW",
+  "name": "Jonah Whitfield",
+  "role": "People coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "2.6 yrs"
+ },
+ {
+  "initials": "JN",
+  "name": "Joon Nakamura",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Part-time · 20h",
+  "tenure": "5.3 yrs"
+ },
+ {
+  "initials": "KA",
+  "name": "Kai Achterberg",
+  "role": "Restaurant supervisor",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "5 mo"
+ },
+ {
+  "initials": "KP",
+  "name": "Kai Patel",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.2 yrs"
+ },
+ {
+  "initials": "KR",
+  "name": "Kai Reid",
+  "role": "Kitchen porter",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "KY",
+  "name": "Kofi Yusuf",
+  "role": "Events coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.6 yrs"
+ },
+ {
+  "initials": "KA",
+  "name": "Kwame Ahmed",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Moorgate",
+  "type": "Part-time · 24h",
+  "tenure": "5.1 yrs"
+ },
+ {
+  "initials": "LC",
+  "name": "Leila Conti",
+  "role": "Spa receptionist",
+  "dept": "Spa & leisure",
+  "site": "Harbour",
+  "type": "Part-time · 20h",
+  "tenure": "3.5 yrs"
+ },
+ {
+  "initials": "LB",
+  "name": "Lena Bennett",
+  "role": "Events coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "2.3 yrs"
+ },
+ {
+  "initials": "LL",
+  "name": "Liam Laurent",
+  "role": "Barista",
+  "dept": "Restaurant & bar",
+  "site": "Quay",
+  "type": "Part-time · 20h",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "LM",
+  "name": "Liam Murray",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "6 mo"
+ },
+ {
+  "initials": "LR",
+  "name": "Luca Reid",
+  "role": "Lifeguard",
+  "dept": "Spa & leisure",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "2.9 yrs"
+ },
+ {
+  "initials": "LR",
+  "name": "Lucía Romero",
+  "role": "Restaurant manager",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "5.3 yrs"
+ },
+ {
+  "initials": "MK",
+  "name": "Marek Kowalski",
+  "role": "Finance assistant",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "11 mo"
+ },
+ {
+  "initials": "MN",
+  "name": "Marek Nakamura",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.8 yrs"
+ },
+ {
+  "initials": "MI",
+  "name": "Maya Iqbal",
+  "role": "Lifeguard",
+  "dept": "Spa & leisure",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "11 mo"
+ },
+ {
+  "initials": "MM",
+  "name": "Maya Murray",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1 mo"
+ },
+ {
+  "initials": "MA",
+  "name": "Mei Adeyemi",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Part-time · 20h",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "MB",
+  "name": "Mei Barker",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "MH",
+  "name": "Molly Hassan",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "2.7 yrs"
+ },
+ {
+  "initials": "MK",
+  "name": "Molly Kaur",
+  "role": "Events coordinator",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.5 yrs"
+ },
+ {
+  "initials": "MN",
+  "name": "Molly Novak",
+  "role": "Reservations agent",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Part-time · 20h",
+  "tenure": "6.1 yrs"
+ },
+ {
+  "initials": "NC",
+  "name": "Nell Conti",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "2.0 yrs"
+ },
+ {
+  "initials": "NP",
+  "name": "Nell Price",
+  "role": "Spa receptionist",
+  "dept": "Spa & leisure",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "5 mo"
+ },
+ {
+  "initials": "NB",
+  "name": "Nia Barker",
+  "role": "Laundry assistant",
+  "dept": "Housekeeping",
+  "site": "Quay",
+  "type": "Seasonal",
+  "tenure": "1 mo"
+ },
+ {
+  "initials": "NH",
+  "name": "Noor Hartley",
+  "role": "Chef de partie",
+  "dept": "Kitchen",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "1.1 yrs"
+ },
+ {
+  "initials": "NS",
+  "name": "Noor Silva",
+  "role": "Spa receptionist",
+  "dept": "Spa & leisure",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "NW",
+  "name": "Noor Walsh",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.9 yrs"
+ },
+ {
+  "initials": "OF",
+  "name": "Oliver Fischer",
+  "role": "Maintenance technician",
+  "dept": "Operations",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "1.4 yrs"
+ },
+ {
+  "initials": "OH",
+  "name": "Oliver Hughes",
+  "role": "Maintenance technician",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "5.8 yrs"
+ },
+ {
+  "initials": "OP",
+  "name": "Oliver Popescu",
+  "role": "Kitchen porter",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Part-time · 30h",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "OP",
+  "name": "Oliver Price",
+  "role": "Public area cleaner",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "5.1 yrs"
+ },
+ {
+  "initials": "OB",
+  "name": "Owen Bennett",
+  "role": "Public area cleaner",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "4.9 yrs"
+ },
+ {
+  "initials": "OB",
+  "name": "Owen Byrne",
+  "role": "Night auditor",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.4 yrs"
+ },
+ {
+  "initials": "PM",
+  "name": "Patrick Malik",
+  "role": "Chef de partie",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "1.4 yrs"
+ },
+ {
+  "initials": "PP",
+  "name": "Patrick Popescu",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Quay",
+  "type": "Full-time",
+  "tenure": "5.6 yrs"
+ },
+ {
+  "initials": "PI",
+  "name": "Precious Iqbal",
+  "role": "Maintenance technician",
+  "dept": "Operations",
+  "site": "Quay",
+  "type": "Part-time · 24h",
+  "tenure": "5 mo"
+ },
+ {
+  "initials": "PR",
+  "name": "Priya Raman",
+  "role": "Head of People",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "7.8 yrs"
+ },
+ {
+  "initials": "RY",
+  "name": "Rahul Yusuf",
+  "role": "Bartender",
+  "dept": "Restaurant & bar",
+  "site": "Quay",
+  "type": "Part-time · 30h",
+  "tenure": "1.0 yrs"
+ },
+ {
+  "initials": "RH",
+  "name": "Ravi Hughes",
+  "role": "Public area cleaner",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "6 mo"
+ },
+ {
+  "initials": "RW",
+  "name": "Ravi Walsh",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.6 yrs"
+ },
+ {
+  "initials": "RL",
+  "name": "Rosa Laurent",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "6.8 yrs"
+ },
+ {
+  "initials": "RO",
+  "name": "Rosa Okonkwo",
+  "role": "Front desk agent",
+  "dept": "Front desk",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "5.7 yrs"
+ },
+ {
+  "initials": "RC",
+  "name": "Ruby Costa",
+  "role": "Sommelier",
+  "dept": "Restaurant & bar",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "5.9 yrs"
+ },
+ {
+  "initials": "RN",
+  "name": "Ruby Novak",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "SB",
+  "name": "Sami Bennett",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "6.1 yrs"
+ },
+ {
+  "initials": "SS",
+  "name": "Sami Silva",
+  "role": "Barista",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "SM",
+  "name": "Saoirse Mensah",
+  "role": "Maintenance technician",
+  "dept": "Operations",
+  "site": "Harbour",
+  "type": "Part-time · 24h",
+  "tenure": "6.8 yrs"
+ },
+ {
+  "initials": "SC",
+  "name": "Siobhan Costa",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Moorgate",
+  "type": "Full-time",
+  "tenure": "6.2 yrs"
+ },
+ {
+  "initials": "TN",
+  "name": "Tariq Nakamura",
+  "role": "Sommelier",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3.9 yrs"
+ },
+ {
+  "initials": "TW",
+  "name": "Tariq Walsh",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "4 mo"
+ },
+ {
+  "initials": "TA",
+  "name": "Theo Achterberg",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Harbour",
+  "type": "Part-time · 20h",
+  "tenure": "4.8 yrs"
+ },
+ {
+  "initials": "TS",
+  "name": "Theo Shah",
+  "role": "Spa receptionist",
+  "dept": "Spa & leisure",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "TF",
+  "name": "Tomás Ferreira",
+  "role": "Front office manager",
+  "dept": "Front desk",
+  "site": "Harbour",
+  "type": "Full-time",
+  "tenure": "8.5 yrs"
+ },
+ {
+  "initials": "YC",
+  "name": "Yusuf Chen",
+  "role": "Room attendant",
+  "dept": "Housekeeping",
+  "site": "Moorgate",
+  "type": "Part-time · 30h",
+  "tenure": "2.0 yrs"
+ },
+ {
+  "initials": "ZI",
+  "name": "Zainab Iqbal",
+  "role": "Waiter",
+  "dept": "Restaurant & bar",
+  "site": "Moorgate",
+  "type": "Part-time · 30h",
+  "tenure": "3 mo"
+ },
+ {
+  "initials": "ZK",
+  "name": "Zainab Kowalski",
+  "role": "Commis chef",
+  "dept": "Kitchen",
+  "site": "Quay",
+  "type": "Part-time · 30h",
+  "tenure": "3.1 yrs"
+ }
+]

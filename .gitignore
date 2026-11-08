@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+app/dist/
+*.tsbuildinfo
+
+# scraped reference assets & capture tooling (not app source)
+_ref/
+capture/
+
+shots/
+
+# logs & env
+*.log
+.env
+.env.local
+.DS_Store
