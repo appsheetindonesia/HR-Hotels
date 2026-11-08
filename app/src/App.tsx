@@ -5,6 +5,8 @@ import { Topbar, Tabbar } from './components/Topbar'
 import { Drawer } from './components/Drawer'
 import { NotificationPanel } from './components/NotificationPanel'
 import { Finder } from './components/Finder'
+import { Toasts } from './components/Toasts'
+import { ActionProvider } from './lib/actions'
 import { useRoute, type Page } from './lib/route'
 import { playPageAnimation } from './lib/animate'
 
@@ -28,6 +30,14 @@ const PAGES: Record<Page, React.ComponentType> = {
 }
 
 export default function App() {
+  return (
+    <ActionProvider>
+      <Shell />
+    </ActionProvider>
+  )
+}
+
+function Shell() {
   const { page } = useRoute()
   const [finder, setFinder] = useState(false)
   const [drawer, setDrawer] = useState(false)
@@ -74,6 +84,7 @@ export default function App() {
       {finder && <Finder onClose={() => setFinder(false)} />}
       {drawer && <Drawer isOpen={drawer} onClose={() => setDrawer(false)} />}
       {notif && <NotificationPanel isOpen={notif} onClose={() => setNotif(false)} />}
+      <Toasts />
     </div>
   )
 }
