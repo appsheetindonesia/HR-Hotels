@@ -1,7 +1,17 @@
 import { useRoute, go } from '../lib/route'
 import { Ico } from '../lib/icons'
+import { gsap } from 'gsap'
+import { useEffect } from 'react'
 
 export function Drawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  useEffect(() => {
+    const tl = gsap.timeline()
+    tl.from('.scrim', { opacity: 0, duration: 0.25 })
+    tl.from('.drawer', { x: '100%', duration: 0.45, ease: 'power3.out' }, 0.05)
+    return () => {
+      tl.kill()
+    }
+  }, [isOpen])
   if (!isOpen) return null
   const { page } = useRoute()
 

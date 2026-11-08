@@ -6,6 +6,7 @@ import { Drawer } from './components/Drawer'
 import { NotificationPanel } from './components/NotificationPanel'
 import { Finder } from './components/Finder'
 import { useRoute, type Page } from './lib/route'
+import { playPageAnimation } from './lib/animate'
 
 const Today = lazy(() => import('./pages/Today').then(m => ({ default: m.Today })))
 const People = lazy(() => import('./pages/People').then(m => ({ default: m.People })))
@@ -43,6 +44,7 @@ export default function App() {
   }, [])
 
   useEffect(() => { scrollTo({ top: 0 }) }, [page])
+  useEffect(() => { playPageAnimation() }, [page])
 
   return (
     <div className="app">

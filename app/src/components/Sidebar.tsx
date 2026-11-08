@@ -1,6 +1,8 @@
 import { Ico } from '../lib/icons'
 import { useRoute, go, type Page } from '../lib/route'
 import { useTheme, useRail } from '../lib/theme'
+import { gsap } from 'gsap'
+import { useEffect } from 'react'
 
 const NAV: { group: string; items: { id: Page; label: string; icon: string; count?: string; badge?: boolean }[] }[] = [
   {
@@ -32,6 +34,10 @@ export function Sidebar({ onSearch }: { onSearch: () => void }) {
   const { page } = useRoute()
   const [theme, setTheme] = useTheme()
   const [rail, toggleRail] = useRail()
+
+  useEffect(() => {
+    gsap.to('.side', { width: rail ? 84 : 252, duration: 0.35, ease: 'power2.inOut' })
+  }, [rail])
 
   return (
     <aside className="side" aria-label="Sidebar">

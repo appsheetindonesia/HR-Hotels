@@ -8,3 +8,4 @@ shots/
 .env
 .env.local
 .DS_Store
+backend/node_modules/
