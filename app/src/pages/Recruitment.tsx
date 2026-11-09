@@ -1,9 +1,11 @@
 import { InteractiveHtmlView } from '../components/InteractiveHtmlView'
-import { RecruitmentPipeline } from './RecruitmentPipeline'
 import { useRoute } from '../lib/route'
+import pipeline from './ref/recruitment/pipeline.html'
 import openings from './ref/recruitment/openings.html'
+
+const M: Record<string, string> = { pipeline, openings }
+
 export function Recruitment() {
   const { sub } = useRoute()
-  if (sub === 'pipeline') return <RecruitmentPipeline />
-  return <InteractiveHtmlView html={openings} cacheKey="Recruitment:openings" />
+  return <InteractiveHtmlView html={M[sub] ?? pipeline} cacheKey={`Recruitment:${sub}`} />
 }

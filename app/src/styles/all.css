@@ -92,3 +92,9 @@
 .rc-card__moves button:disabled{opacity:.3}
 @media (width<=1279px){.rc-board{grid-template-columns:repeat(5,minmax(170px,1fr))}}
 @media (width<=760px){.rc-board{grid-template-columns:repeat(5,minmax(160px,1fr))}}
+
+/* Drag & drop affordances (interactive layer) */
+.drop-zone.is-over{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.rchip,.shift,.rc-card{cursor:grab}
+.rchip:active,.shift:active,.rc-card:active{cursor:grabbing}
+.rchip.is-drag,.shift.is-drag,.rc-card.is-drag{opacity:.45}
